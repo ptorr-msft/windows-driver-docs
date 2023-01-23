@@ -8,7 +8,19 @@ ms.date: 01/07/2019
 
 # Filtering condition flags
 
-The filtering condition flags are each represented by a bit field. These flags are defined as follows:
+The filtering condition flags are each represented by a bit field. 
+
+To find these flags, use the appropriate  **FWPS_FIELDS_&lt;LAYER_ID&gt;_FLAG** value, based on the value of **inFixedValues->layerId** parameter passed
+to your [**classifyFn**](/windows-hardware/drivers/ddi/fwpsk/nc-fwpsk-fwps_callout_classify_fn2). For example, for the **ALE_AUTH_CONNECT_V4** layer, 
+use:
+
+```C++
+auto flags = inFixedValues->incomingValue[FWPS_FIELD_ALE_AUTH_CONNECT_V4_FLAGS].value.uint32;
+```
+
+The **FWPS_FIELDS_** enumerations for each layer are listed in the [fwpsk.h header](/windows-hardware/drivers/ddi/fwpsk/#enumerations). 
+
+The flags are defined as follows:
 
 > [!NOTE]
 > This topic contains filtering condition flags for kernel mode WFP callout drivers. For information about filtering condition flags that are shared between user mode and kernel mode, or if you are looking for information about a flag that isn't listed here, see [Filtering Condition Flags](/windows/desktop/FWP/filtering-condition-flags-).
